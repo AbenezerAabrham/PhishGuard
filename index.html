@@ -1,0 +1,206 @@
+<!-- PhishGuard | Author: Abenezer | MIT License | 2026 -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PhishGuard — Phishing URL Analyzer</title>
+  <meta name="description"
+    content="Instantly analyze any URL for phishing indicators. PhishGuard uses advanced heuristics, entropy analysis, and brand impersonation detection to score URLs for risk." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Animated background grid -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-wrapper">
+
+    <!-- header -->
+    <header class="header">
+      <div class="logo-mark">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="url(#logoGrad)" stroke-width="2" />
+          <path d="M18 8 L26 13 L26 21 C26 25.4 22.4 29 18 30 C13.6 29 10 25.4 10 21 L10 13 Z" fill="url(#shieldGrad)"
+            opacity="0.85" />
+          <path d="M15 18 L17 20 L21 16" stroke="#fff" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" />
+              <stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+            <linearGradient id="shieldGrad" x1="10" y1="8" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" />
+              <stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">PhishGuard</span>
+      </div>
+      <div class="header-badge">
+        <span class="pulse-dot"></span>
+        <span>Live Analysis</span>
+      </div>
+    </header>
+
+    <!-- hero -->
+    <section class="hero">
+      <h1 class="hero-title">
+        Detect Phishing URLs<br />
+        <span class="gradient-text">Before They Deceive You</span>
+      </h1>
+      <p class="hero-sub">
+        Advanced heuristic analysis using entropy scoring, typosquatting detection,<br />
+        brand impersonation fingerprinting, and 12+ threat indicators.
+      </p>
+    </section>
+
+    <!-- URL input -->
+    <div class="input-card glass">
+      <div class="input-wrapper" id="inputWrapper">
+        <div class="input-icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8" />
+            <path d="m21 21-4.35-4.35" />
+          </svg>
+        </div>
+        <input type="text" id="urlInput" class="url-input"
+          placeholder="Enter a URL to analyze… e.g. http://paypa1-secure-login.ru/verify" autocomplete="off"
+          spellcheck="false" />
+        <button id="clearBtn" class="clear-btn" title="Clear" aria-label="Clear input" style="display:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round">
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <button id="analyzeBtn" class="analyze-btn">
+        <span class="btn-text">Analyze URL</span>
+        <span class="btn-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </span>
+        <span class="btn-loader" aria-hidden="true"></span>
+      </button>
+    </div>
+
+    <!-- example chips -->
+    <div class="quick-examples">
+      <span class="examples-label">Try an example:</span>
+      <button class="example-chip phish" data-url="http://paypa1-login-secure.ru/account/verify">Phishing URL</button>
+      <button class="example-chip phish" data-url="http://192.168.1.1/bank-login/secure">IP-Based URL</button>
+      <button class="example-chip safe" data-url="https://www.google.com">Legit URL</button>
+      <button class="example-chip safe" data-url="https://github.com/login">GitHub Login</button>
+    </div>
+
+    <!-- results -->
+    <div id="resultsPanel" class="results-panel hidden">
+
+      <!-- URL breakdown -->
+      <div class="url-breakdown glass" id="urlBreakdown"></div>
+
+      <!-- score + verdict -->
+      <div class="verdict-row">
+        <div class="score-ring-container">
+          <svg class="score-ring" viewBox="0 0 120 120" width="120" height="120">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" cx="60" cy="60" r="52" id="ringFill" />
+          </svg>
+          <div class="score-center">
+            <span id="scoreNum" class="score-num">0</span>
+            <span class="score-label">/ 100</span>
+          </div>
+        </div>
+
+        <div class="verdict-info">
+          <div id="verdictBadge" class="verdict-badge"></div>
+          <p id="verdictDesc" class="verdict-desc"></p>
+          <div class="threat-meter">
+            <div class="threat-meter-label">Threat Level</div>
+            <div class="threat-bar-track">
+              <div class="threat-bar-fill" id="threatBarFill"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- findings cards -->
+      <div class="findings-grid" id="findingsGrid"></div>
+
+      <!-- indicator table -->
+      <div class="detail-section glass">
+        <h3 class="detail-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4" />
+            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" />
+          </svg>
+          Indicator Breakdown
+        </h3>
+        <div id="indicatorTable" class="indicator-table"></div>
+      </div>
+
+      <!-- recommendation -->
+      <div id="recommendation" class="recommendation-box glass"></div>
+
+      <!-- reset -->
+      <button class="reset-btn" id="resetBtn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" />
+          <path d="M3 3v5h5" />
+        </svg>
+        Analyze Another URL
+      </button>
+    </div>
+
+    <!-- stats bar -->
+    <div class="stats-bar glass">
+      <div class="stat-item">
+        <span class="stat-num">12+</span>
+        <span class="stat-label">Threat Indicators</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">200+</span>
+        <span class="stat-label">Tracked Brands</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">Real-time</span>
+        <span class="stat-label">Local Analysis</span>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <span class="stat-num">0</span>
+        <span class="stat-label">Data Collected</span>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <p>PhishGuard analyzes URLs locally — no data leaves your browser. For high-risk decisions, consult a
+        cybersecurity professional.</p>
+    </footer>
+
+  </div>
+
+  <script src="analyzer.js"></script>
+</body>
+
+</html>
