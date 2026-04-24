@@ -1,6 +1,6 @@
 # PhishGuard — Phishing URL Analyzer 🎣🛡️
 
-**Live Demo:** [phish-guard-omega.vercel.app](https://phish-guard-omega.vercel.app/)
+Live application link:** [phish-guard-omega.vercel.app](https://phish-guard-omega.vercel.app/)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Status: Active](https://img.shields.io/badge/Status-Active-success.svg)]()
