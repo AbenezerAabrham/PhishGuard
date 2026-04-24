@@ -1,0 +1,246 @@
+<!-- PhishGuard Cheat Sheet | Author: Abenezer | MIT License | 2026 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shell Command Cheat Sheet | PhishGuard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .cheat-sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .category-card {
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      height: 100%;
+    }
+    .category-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--indigo-light);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 12px;
+    }
+    .command-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .command-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .cmd {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--cyan-light);
+      background: rgba(6, 182, 212, 0.1);
+      padding: 4px 8px;
+      border-radius: 4px;
+      width: fit-content;
+    }
+    .desc {
+      font-size: 0.82rem;
+      color: #94a3b8;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--indigo-light);
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <div class="app-wrapper">
+    <header class="header">
+      <div class="logo-mark">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="url(#logoGrad)" stroke-width="2" />
+          <path d="M18 8 L26 13 L26 21 C26 25.4 22.4 29 18 30 C13.6 29 10 25.4 10 21 L10 13 Z" fill="url(#shieldGrad)" opacity="0.85" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="36" x2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" /><stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+            <linearGradient id="shieldGrad" x1="10" y1="8" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" /><stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">PhishGuard Docs</span>
+      </div>
+    </header>
+
+    <section class="hero" style="padding: 40px 0 20px;">
+      <a href="index.html" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to Analyzer
+      </a>
+      <h1 class="hero-title">Shell Command <span class="gradient-text">Cheat Sheet</span></h1>
+      <p class="hero-sub">Master the terminal with this essential guide to the most important shell commands.</p>
+    </section>
+
+    <div class="cheat-sheet-grid">
+      <!-- File Navigation -->
+      <div class="category-card glass">
+        <h2 class="category-title">📂 File Navigation</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">ls -la</span>
+            <span class="desc">List all files including hidden ones with details.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">cd [dir]</span>
+            <span class="desc">Change directory. Use 'cd ..' to go up.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">pwd</span>
+            <span class="desc">Print current working directory path.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">mkdir -p [dir]</span>
+            <span class="desc">Create a new directory (and parents if needed).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Operations -->
+      <div class="category-card glass">
+        <h2 class="category-title">🛠️ File Operations</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">touch [file]</span>
+            <span class="desc">Create an empty file.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">cp -r [src] [dest]</span>
+            <span class="desc">Copy files or directories recursively.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">mv [src] [dest]</span>
+            <span class="desc">Move or rename files/directories.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">rm -rf [path]</span>
+            <span class="desc">Force remove files or directories (Careful!).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- System Info -->
+      <div class="category-card glass">
+        <h2 class="category-title">🖥️ System Info</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">top / htop</span>
+            <span class="desc">Display running processes in real-time.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">df -h</span>
+            <span class="desc">Show free disk space in human-readable format.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">free -m</span>
+            <span class="desc">Show memory usage in MB.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">uname -a</span>
+            <span class="desc">Print system information (kernel version, etc).</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Git Essentials -->
+      <div class="category-card glass">
+        <h2 class="category-title">🐙 Git Essentials</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">git status</span>
+            <span class="desc">Check the status of your local changes.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">git add .</span>
+            <span class="desc">Stage all changes for the next commit.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">git commit -m "msg"</span>
+            <span class="desc">Commit staged changes with a message.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">git push origin main</span>
+            <span class="desc">Push local commits to the remote repository.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Network -->
+      <div class="category-card glass">
+        <h2 class="category-title">🌐 Network</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">curl -I [url]</span>
+            <span class="desc">Fetch the HTTP headers of a URL.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">ping [host]</span>
+            <span class="desc">Check connectivity to a remote host.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">ssh [user]@[host]</span>
+            <span class="desc">Securely login to a remote machine.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search & Process -->
+      <div class="category-card glass">
+        <h2 class="category-title">🔍 Search & Process</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <span class="cmd">grep "text" [file]</span>
+            <span class="desc">Search for text patterns inside files.</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">tail -f [file]</span>
+            <span class="desc">Watch a file grow in real-time (useful for logs).</span>
+          </div>
+          <div class="command-item">
+            <span class="cmd">find . -name "*.js"</span>
+            <span class="desc">Find all JS files in the current directory.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer" style="margin-top: 60px;">
+      <p>Keep this page bookmarked. Use the terminal with confidence. 🚀</p>
+    </footer>
+  </div>
+</body>
+</html>
