@@ -1,5 +1,7 @@
 # PhishGuard — Phishing URL Analyzer 🎣🛡️
 
+**Live Demo:** [phish-guard-omega.vercel.app](https://phish-guard-omega.vercel.app/)
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Status: Active](https://img.shields.io/badge/Status-Active-success.svg)]()
 [![Cybersecurity](https://img.shields.io/badge/Domain-Cybersecurity-red.svg)]()
@@ -8,6 +10,7 @@
 **PhishGuard** is an advanced, automated Phishing URL Analyzer built to run entirely inside your browser. Designed for threat intelligence analysts, security operations, and everyday users to detect malicious links before clicking them. It instantly analyzes URLs using sophisticated heuristics, entropy calculation, and brand impersonation fingerprinting to provide a definitive risk score.
 
 > **Google Search Keywords**: Phishing URL Analyzer, Malicious Link Checker, Anti-Phishing Tool, Cybersecurity Threat Intelligence, Identify Fake Websites, Detect Typosquatting, URL Entropy Calculator, Safe Browsing, PhishGuard.
+
 
 ---
 
@@ -24,15 +27,26 @@
 
 ## 🛠️ Installation & Setup
 
-PhishGuard requires no database, no backend API, and no heavy dependencies. 
+PhishGuard can be used as a standalone web page or installed directly as a browser extension!
 
+### Option 1: Browser Extension (Edge / Chrome)
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/YourUsername/phishing-analyzer.git
+   git clone https://github.com/AbenezerAabrham/PhishGuard.git
+   ```
+2. Open your browser and go to `edge://extensions/` (for Edge) or `chrome://extensions/` (for Chrome).
+3. Turn on **Developer mode**.
+4. Click **Load unpacked** and select the cloned `PhishGuard` folder.
+5. The extension is now installed! Pin it to your toolbar for quick access.
+
+### Option 2: Standalone Web Page
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/AbenezerAabrham/PhishGuard.git
    ```
 2. **Navigate to the Directory**:
    ```bash
-   cd phishing-analyzer
+   cd PhishGuard
    ```
 3. **Run the Application**:
    Open `index.html` in your web browser.
