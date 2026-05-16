@@ -1,0 +1,854 @@
+<!-- PhishGuard Cheat Sheet | Author: Abenezer | MIT License | 2026 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Mastery | Shell Command Cheat Sheet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .app-wrapper {
+      max-width: 1400px; /* Wider for zoom/fill */
+      width: 95%;
+    }
+    .cheat-sheet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Fill space dynamically */
+      gap: 20px;
+      margin-top: 40px;
+    }
+    .category-card {
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .category-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+      border-color: var(--indigo);
+    }
+    .category-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--indigo-light);
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-glass);
+      padding-bottom: 12px;
+    }
+    .command-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .command-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .cmd-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .cmd {
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--cyan-light);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 4px 10px;
+      border-radius: 6px;
+      word-break: break-all;
+    }
+    .desc {
+      font-size: 0.8rem;
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #64748b;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      transition: color 0.2s;
+    }
+    .back-link:hover {
+      color: var(--indigo-light);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, var(--indigo-light), var(--cyan-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-wrapper">
+    <header class="header">
+      <div class="logo-mark">
+        <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="18" cy="18" r="17" stroke="url(#logoGrad)" stroke-width="2" />
+          <path d="M18 8 L26 13 L26 21 C26 25.4 22.4 29 18 30 C13.6 29 10 25.4 10 21 L10 13 Z" fill="url(#shieldGrad)" opacity="0.85" />
+          <defs>
+            <linearGradient id="logoGrad" x1="0" y1="0" x2="36" x2="36" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" /><stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+            <linearGradient id="shieldGrad" x1="10" y1="8" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#6366f1" /><stop offset="1" stop-color="#06b6d4" />
+            </linearGradient>
+          </defs>
+        </svg>
+        <span class="logo-text">Terminal Mastery</span>
+      </div>
+    </header>
+
+    <section class="hero" style="padding: 40px 0 20px; text-align: left;">
+      <a href="https://phish-guard-omega.vercel.app/" class="back-link">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        Back to PhishGuard
+      </a>
+      <h1 class="hero-title" style="font-size: 3rem;">Master the <span class="gradient-text">Command Line</span></h1>
+      <p class="hero-sub" style="max-width: 600px;">A comprehensive reference for the most powerful shell commands, organized for efficiency and beauty.</p>
+    </section>
+
+    <div class="cheat-sheet-grid">
+      
+      <!-- File Navigation -->
+      <div class="category-card glass">
+        <h2 class="category-title">📂 Navigation</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">ls -laR</span></div>
+            <span class="desc">List all files, hidden ones, and subdirectories recursively.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">cd -</span></div>
+            <span class="desc">Switch back to the previous working directory.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">pushd / popd</span></div>
+            <span class="desc">Save current directory to a stack and return later.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- File Manipulation -->
+      <div class="category-card glass">
+        <h2 class="category-title">🛠️ File Ops</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">cp -rv</span></div>
+            <span class="desc">Copy files with verbose output to see progress.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">rmdir</span></div>
+            <span class="desc">Remove an empty directory safely.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">ln -s [target] [link]</span></div>
+            <span class="desc">Create a symbolic link (shortcut) to a file.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Text Processing -->
+      <div class="category-card glass">
+        <h2 class="category-title">📝 Text & Logs</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">grep -rnE "regex"</span></div>
+            <span class="desc">Powerful recursive search using Extended Regex.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">awk '{print $1}'</span></div>
+            <span class="desc">Extract the first column of data from a file/stream.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">sed -i 's/old/new/g'</span></div>
+            <span class="desc">In-place find and replace text within a file.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">sort | uniq -c</span></div>
+            <span class="desc">Sort lines and count unique occurrences.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Git Mastery -->
+      <div class="category-card glass">
+        <h2 class="category-title">🐙 Git Mastery</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">git checkout -b [name]</span></div>
+            <span class="desc">Create and switch to a new branch instantly.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">git log --oneline --graph</span></div>
+            <span class="desc">View a visual, condensed history of your project.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">git commit --amend</span></div>
+            <span class="desc">Modify your last commit (useful for fixing typos).</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">git stash / pop</span></div>
+            <span class="desc">Temporarily save changes without committing.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Docker -->
+      <div class="category-card glass">
+        <h2 class="category-title">🐳 Docker</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">docker ps -a</span></div>
+            <span class="desc">List all containers (running and stopped).</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">docker exec -it [id] bash</span></div>
+            <span class="desc">Enter a running container's terminal.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">docker-compose up -d</span></div>
+            <span class="desc">Launch multi-container apps in detached mode.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">docker system prune</span></div>
+            <span class="desc">Clean up unused images, containers, and networks.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vercel & Deployment -->
+      <div class="category-card glass">
+        <h2 class="category-title">🚀 Deployment</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">vercel --prod</span></div>
+            <span class="desc">Deploy your current directory to production.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">vercel logs</span></div>
+            <span class="desc">Stream live deployment logs to your terminal.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">gh repo create</span></div>
+            <span class="desc">Interactively create a new GitHub repository.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Permissions -->
+      <div class="category-card glass">
+        <h2 class="category-title">🔒 Permissions</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">chmod +x [file]</span></div>
+            <span class="desc">Make a script or file executable.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">chown -R [user]:[group]</span></div>
+            <span class="desc">Change ownership of a folder recursively.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">sudo !!</span></div>
+            <span class="desc">Repeat the last command but with sudo.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pro Shortcuts -->
+      <div class="category-card glass">
+        <h2 class="category-title">⚡ Pro Shortcuts</h2>
+        <div class="command-list">
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">Ctrl + R</span></div>
+            <span class="desc">Reverse-search through your command history.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">Ctrl + L</span></div>
+            <span class="desc">Clear the terminal screen instantly.</span>
+          </div>
+          <div class="command-item">
+            <div class="cmd-row"><span class="cmd">Tab / Double Tab</span></div>
+            <span class="desc">Auto-complete commands, paths, and options.</span>
+          </div>
+        </div>
+      </div>
+<!-- ARP, Wireshark, Nmap, and Ping command reference sections -->
+
+<!-- Sources: arp(8) man page, wireshark/tshark documentation, nmap(1) man page, ping(8) man page -->
+
+<div class="category-card glass">
+  <h2 class="category-title">🛰️ ARP</h2>
+  <div class="command-list">
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -a</span></div>
+      <span class="desc">Display the ARP table (default mode).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -n</span></div>
+      <span class="desc">Show numeric IP addresses (no hostname resolution).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -v</span></div>
+      <span class="desc">Verbose output – more detail about operations.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -d &lt;hostname|IP&gt;</span></div>
+      <span class="desc">Delete the ARP entry for the specified host (requires root).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -s &lt;hostname|IP&gt; &lt;mac_addr&gt;</span></div>
+      <span class="desc">Create a static ARP entry mapping host to MAC address.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -i &lt;interface&gt;</span></div>
+      <span class="desc">Limit the operation to a specific network interface.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">arp -H &lt;type&gt;</span></div>
+      <span class="desc">Specify the hardware type (default is ether).</span>
+    </div>
+  </div>
+</div>
+
+<div class="category-card glass">
+  <h2 class="category-title">🖥️ Wireshark / Tshark</h2>
+  <div class="command-list">
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -i &lt;iface&gt;</span></div>
+      <span class="desc">Capture on the specified interface.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -f &lt;capture filter&gt;</span></div>
+      <span class="desc">Apply a BPF capture filter (e.g., &quot;tcp port 80&quot;).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -Y &lt;display filter&gt;</span></div>
+      <span class="desc">Display filter (Wireshark syntax) applied while capturing.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -w &lt;file.pcap&gt;</span></div>
+      <span class="desc">Write captured packets to a file.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -r &lt;file.pcap&gt;</span></div>
+      <span class="desc">Read packets from a capture file.
+    </span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -c &lt;count&gt;</span></div>
+      <span class="desc">Stop after capturing a specific number of packets.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -a duration:&lt;seconds&gt;</span></div>
+      <span class="desc">Autostop capture after given duration.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -a filesize:&lt;bytes&gt;</span></div>
+      <span class="desc">Autostop when captured file reaches size limit.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -s &lt;snaplen&gt;</span></div>
+      <span class="desc">Set snapshot length (bytes per packet).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -n</span></div>
+      <span class="desc">Disable network name resolution for speed.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">tshark -T fields -e &lt;field&gt; -E separator=,</span></div>
+      <span class="desc">Export selected fields as CSV.</span>
+    </div>
+  </div>
+</div>
+
+<div class="category-card glass">
+  <h2 class="category-title">📡 Nmap</h2>
+  <div class="command-list">
+    <!-- Basic Scan Types -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sS &lt;target&gt;</span></div>
+      <span class="desc">TCP SYN (stealth) scan – default for privileged users.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sT &lt;target&gt;</span></div>
+      <span class="desc">TCP connect scan – works without raw sockets.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sU &lt;target&gt;</span></div>
+      <span class="desc">UDP scan – discover UDP services.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sV &lt;target&gt;</span></div>
+      <span class="desc">Service/version detection on open ports.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -O &lt;target&gt;</span></div>
+      <span class="desc">OS detection (requires open & closed ports).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -A &lt;target&gt;</span></div>
+      <span class="desc">Aggressive scan – -O -sV -sC -traceroute.</span>
+    </div>
+    <!-- Host Discovery -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sn &lt;target&gt;</span></div>
+      <span class="desc">Ping scan – list hosts without port scan.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -Pn &lt;target&gt;</span></div>
+      <span class="desc">Treat all hosts as up – skip discovery.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -PE -PA80,443 -PS22 -PU53 &lt;target&gt;</span></div>
+      <span class="desc">Specify ICMP, ACK, SYN, UDP probes for discovery.</span>
+    </div>
+    <!-- Port Specification -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -p 22,80,443 &lt;target&gt;</span></div>
+      <span class="desc">Scan only the listed ports.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -p- &lt;target&gt;</span></div>
+      <span class="desc">Scan all 65535 ports.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -F &lt;target&gt;</span></div>
+      <span class="desc">Fast scan – only common ports.</span>
+    </div>
+    <!-- Timing & Performance -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -T4 &lt;target&gt;</span></div>
+      <span class="desc">Timing template 4 – faster but more aggressive.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap --max-retries 1 &lt;target&gt;</span></div>
+      <span class="desc">Reduce probe retries for speed.</span>
+    </div>
+    <!-- Output -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -oN scan.txt &lt;target&gt;</span></div>
+      <span class="desc">Normal (human‑readable) output to file.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -oX scan.xml &lt;target&gt;</span></div>
+      <span class="desc">XML output for further processing.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -oG grepable.txt &lt;target&gt;</span></div>
+      <span class="desc">Grep‑able output for quick parsing.</span>
+    </div>
+    <!-- NSE Scripts -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap --script=default &lt;target&gt;</span></div>
+      <span class="desc">Run the default set of NSE scripts.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nmap -sC &lt;target&gt;</span></div>
+      <span class="desc">Shortcut for --script=default.</span>
+    </div>
+  </div>
+</div>
+
+<div class="category-card glass">
+  <h2 class="category-title">🏓 Ping</h2>
+  <div class="command-list">
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -c 4 &lt;host&gt;</span></div>
+      <span class="desc">Send 4 ICMP echo requests and stop.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -i 0.2 &lt;host&gt;</span></div>
+      <span class="desc">Set interval between packets (seconds).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -s 128 &lt;host&gt;</span></div>
+      <span class="desc">Set packet size to 128 bytes (payload).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -W 3 &lt;host&gt;</span></div>
+      <span class="desc">Wait up to 3 seconds for each reply.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -t 64 &lt;host&gt;</span></div>
+      <span class="desc">Set TTL (time‑to‑live) to 64 hops.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -q &lt;host&gt;</span></div>
+      <span class="desc">Quiet output – only summary statistics.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -b &lt;broadcast&gt;</span></div>
+      <span class="desc">Send ping packets to broadcast address (requires root).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">ping -D &lt;host&gt;</span></div>
+      <span class="desc">Print timestamps before each line (debugging).</span>
+    </div>
+  </div>
+</div>
+
+<!-- Find Utility -->
+<div class="category-card glass">
+  <h2 class="category-title">🔍 Find</h2>
+  <div class="command-list">
+    <!-- Basic Search -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -name "*.txt"</span></div>
+      <span class="desc">Find files by exact name (case-sensitive).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -iname "*.txt"</span></div>
+      <span class="desc">Find files by name (case-insensitive).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -type f</span></div>
+      <span class="desc">Find only regular files (use d for directories).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -empty</span></div>
+      <span class="desc">Find empty files and directories.</span>
+    </div>
+    <!-- Size Search -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -size +50M</span></div>
+      <span class="desc">Find files larger than 50 Megabytes.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -size -10k</span></div>
+      <span class="desc">Find files smaller than 10 Kilobytes.</span>
+    </div>
+    <!-- Time Search -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -mtime -7</span></div>
+      <span class="desc">Find files modified in the last 7 days.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -atime +30</span></div>
+      <span class="desc">Find files accessed more than 30 days ago.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -mmin -60</span></div>
+      <span class="desc">Find files modified in the last 60 minutes.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -newer file.txt</span></div>
+      <span class="desc">Find files modified more recently than file.txt.</span>
+    </div>
+    <!-- Ownership & Permissions -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -user &lt;username&gt;</span></div>
+      <span class="desc">Find files owned by a specific user.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -group &lt;groupname&gt;</span></div>
+      <span class="desc">Find files owned by a specific group.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -perm 644</span></div>
+      <span class="desc">Find files with exact 644 permissions.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -perm /u=s</span></div>
+      <span class="desc">Find files with the SUID bit set.</span>
+    </div>
+    <!-- Path & Depth -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -maxdepth 2</span></div>
+      <span class="desc">Limit search to current directory and 1 level down.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -mindepth 3</span></div>
+      <span class="desc">Start searching from at least 3 levels deep.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -path "*/dir/*"</span></div>
+      <span class="desc">Match pattern against the full path.</span>
+    </div>
+    <!-- Execution & Actions -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -name "*.log" -delete</span></div>
+      <span class="desc">Find and immediately delete matching files.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -type f -exec grep -l "TODO" {} \;</span></div>
+      <span class="desc">Execute a command on each found file individually.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -type f -exec chmod 644 {} +</span></div>
+      <span class="desc">Execute a command on all found files at once.</span>
+    </div>
+    <!-- Logic & Pruning -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -name "*.txt" -o -name "*.md"</span></div>
+      <span class="desc">Logical OR: matches either condition.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . ! -name "*.html"</span></div>
+      <span class="desc">Logical NOT: matches files that do not end in .html.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">find . -path "*/node_modules*" -prune -o -print</span></div>
+      <span class="desc">Exclude a directory (e.g., node_modules) from the search.</span>
+    </div>
+  </div>
+</div>
+
+<!-- Grep Utility -->
+<div class="category-card glass">
+  <h2 class="category-title">🔍 Grep</h2>
+  <div class="command-list">
+    <!-- Basic Search -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep "pattern" file</span></div>
+      <span class="desc">Search for a string or regex pattern in a file.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -i "pattern" file</span></div>
+      <span class="desc">Case-insensitive search.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -w "word" file</span></div>
+      <span class="desc">Match the exact whole word only.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -x "line" file</span></div>
+      <span class="desc">Match the exact whole line only.</span>
+    </div>
+    <!-- Advanced Matching -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -v "pattern" file</span></div>
+      <span class="desc">Invert match: show lines that do NOT contain the pattern.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -E "regex" file</span></div>
+      <span class="desc">Use Extended Regular Expressions (same as egrep).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -F "string" file</span></div>
+      <span class="desc">Treat pattern as fixed string, no regex (same as fgrep).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -o "pattern" file</span></div>
+      <span class="desc">Show ONLY the matching part of the line, not the full line.</span>
+    </div>
+    <!-- Output Formatting & Context -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -n "pattern" file</span></div>
+      <span class="desc">Prefix each matching line with its line number.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -c "pattern" file</span></div>
+      <span class="desc">Print only a count of matching lines.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -A 3 "pattern" file</span></div>
+      <span class="desc">Show 3 lines of context AFTER the match.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -B 3 "pattern" file</span></div>
+      <span class="desc">Show 3 lines of context BEFORE the match.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -C 3 "pattern" file</span></div>
+      <span class="desc">Show 3 lines of context AROUND the match (before and after).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep --color=auto "pattern" file</span></div>
+      <span class="desc">Highlight the matched string in color.</span>
+    </div>
+    <!-- Multiple Files & Recursive -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -r "pattern" dir/</span></div>
+      <span class="desc">Recursively search all files in the directory.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -l "pattern" dir/*</span></div>
+      <span class="desc">Print only the names of files containing the match.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -L "pattern" dir/*</span></div>
+      <span class="desc">Print only the names of files that do NOT contain the match.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -H "pattern" file</span></div>
+      <span class="desc">Print the file name for each match (default for multiple files).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -h "pattern" file1 file2</span></div>
+      <span class="desc">Suppress file name prefixes on output.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">grep -m 5 "pattern" file</span></div>
+      <span class="desc">Stop reading the file after 5 matches.</span>
+    </div>
+  </div>
+</div>
+
+<!-- Sed Utility -->
+<div class="category-card glass">
+  <h2 class="category-title">📝 Sed</h2>
+  <div class="command-list">
+    <!-- Substitution / Find & Replace -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/old/new/' file</span></div>
+      <span class="desc">Replace first occurrence of 'old' with 'new' on each line.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/old/new/g' file</span></div>
+      <span class="desc">Replace ALL occurrences globally on each line.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/old/new/2' file</span></div>
+      <span class="desc">Replace ONLY the 2nd occurrence on a line.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/old/new/ig' file</span></div>
+      <span class="desc">Case-insensitive global replacement.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -i 's/old/new/g' file</span></div>
+      <span class="desc">In-place edit (overwrites the original file directly).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -i.bak 's/old/new/g' file</span></div>
+      <span class="desc">In-place edit but create a .bak backup first.</span>
+    </div>
+    <!-- Selective Substitution -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '3s/old/new/g' file</span></div>
+      <span class="desc">Replace only on line 3.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '1,5s/old/new/g' file</span></div>
+      <span class="desc">Replace only on lines 1 through 5.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '/pattern/s/old/new/g' file</span></div>
+      <span class="desc">Replace only on lines that contain 'pattern'.</span>
+    </div>
+    <!-- Deletion -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '3d' file</span></div>
+      <span class="desc">Delete line 3 from output.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '2,5d' file</span></div>
+      <span class="desc">Delete lines 2 through 5.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '/pattern/d' file</span></div>
+      <span class="desc">Delete lines that contain 'pattern'.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '/^$/d' file</span></div>
+      <span class="desc">Delete all empty/blank lines.</span>
+    </div>
+    <!-- Printing -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -n 'p' file</span></div>
+      <span class="desc">Print all lines (-n suppresses default output).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -n '5p' file</span></div>
+      <span class="desc">Print ONLY line 5.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -n '2,6p' file</span></div>
+      <span class="desc">Print lines 2 through 6.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed -n '/pattern/p' file</span></div>
+      <span class="desc">Print lines matching 'pattern' (acts like grep).</span>
+    </div>
+    <!-- Formatting/Cleanup -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/^[ \t]*//' file</span></div>
+      <span class="desc">Remove leading whitespace/tabs from lines.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed 's/[ \t]*$//' file</span></div>
+      <span class="desc">Remove trailing whitespace/tabs from lines.</span>
+    </div>
+    <!-- Insertion/Appending -->
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '3a\New Line' file</span></div>
+      <span class="desc">Append 'New Line' AFTER line 3.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '3i\New Line' file</span></div>
+      <span class="desc">Insert 'New Line' BEFORE line 3.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">sed '3c\Replaced' file</span></div>
+      <span class="desc">Change/Replace the entire line 3 with 'Replaced'.</span>
+    </div>
+  </div>
+</div>
+
+<!-- Netcat (nc) Utility -->
+<div class="category-card glass">
+  <h2 class="category-title">📡 Netcat</h2>
+  <div class="command-list">
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -l -p 1234</span></div>
+      <span class="desc">Listen on TCP port 1234 (default mode). Use -u for UDP.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc host.example.com 1234</span></div>
+      <span class="desc">Connect to host on port 1234.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -vz host.example.com 20-30</span></div>
+      <span class="desc">Verbose port scan on range 20‑30.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -e /bin/bash -l -p 4444</span></div>
+      <span class="desc">Spawn a bind shell on port 4444 (requires root).</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -c 'date' host.example.com 1234</span></div>
+      <span class="desc">Execute a command after connection and send output.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -u host.example.com 1234</span></div>
+      <span class="desc">Communicate using UDP rather than TCP.</span>
+    </div>
+    <div class="command-item">
+      <div class="cmd-row"><span class="cmd">nc -w 3 host.example.com 1234</span></div>
+      <span class="desc">Set a timeout of 3 seconds for connections.</span>
+    </div>
+  </div>
+</div>
+<!-- End of added command reference sections -->
+
+    </div>
+
+    <footer class="footer" style="margin-top: 80px; border-top: 1px solid var(--border-glass); padding-top: 40px;">
+      <p>Mastery is built through repetition. Keep this tab pinned. 🛡️</p>
+    </footer>
+  </div>
+</body>
+</html>
