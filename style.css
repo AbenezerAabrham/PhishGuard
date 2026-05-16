@@ -184,15 +184,32 @@ body {
 }
 
 .nav-link {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #fff;
   text-decoration: none;
-  transition: color 0.2s;
+  padding: 8px 16px;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #ff4d4d 0%, #f97316 100%);
+  box-shadow: 0 4px 15px rgba(249, 115, 22, 0.3);
+  transition: all 0.3s var(--ease-out);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-link:hover {
-  color: var(--indigo-light);
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.5);
+  filter: brightness(1.1);
+}
+
+.nav-link::before {
+  content: '🔥';
+  font-size: 1rem;
 }
 
 .header-badge {
